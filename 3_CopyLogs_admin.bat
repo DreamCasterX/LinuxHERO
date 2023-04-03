@@ -22,7 +22,7 @@ if exist sleepstudy-report.html move sleepstudy-report.html %~dp0\logs
 for /f %%i in ('dir /b /ad /od %PERF_LOG_PATH%') do set LATEST_FOLDER=%%i
 xcopy /E /Q /I %PERF_LOG_PATH%\%LATEST_FOLDER% %~dp0\logs\%LATEST_FOLDER%
 start /max %~dp0\data\wac.exe %~dp0\logs\%LATEST_FOLDER%\%LATEST_FOLDER%.xml
-start %~dp0\data\nircmd.exe cmdwait 3000 savescreenshot "%~dp0\logs\TEST.png"
+start %~dp0\data\nircmd.exe cmdwait 3000 savescreenshot "%~dp0\logs\Results.png"
 timeout 5 > NUL
 taskkill /f /im wac.exe > NUL
 
