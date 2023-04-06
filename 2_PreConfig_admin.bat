@@ -1,25 +1,39 @@
 @echo off
 
 
+:: DISABLE ADAPTIVE BRIGHTNESS
+powercfg -setacvalueindex SCHEME_CURRENT 7516b95f-f776-4464-8c53-06167f40cc99 FBD9AA66-9553-4097-BA44-ED6E9D65EAB8 0
+powercfg -setdcvalueindex SCHEME_CURRENT 7516b95f-f776-4464-8c53-06167f40cc99 FBD9AA66-9553-4097-BA44-ED6E9D65EAB8 0
+powercfg -SetActive SCHEME_CURRENT
+
+
+:: SET BRIGHTNESS LEVEL
+set /p BRIGHTNESS=Enter brightness level conforming to 150 nits (0~100): 
+cls
+powershell -command "(Get-WmiObject -Namespace root/WMI -Class WmiMonitorBrightnessMethods).WmiSetBrightness(1,%BRIGHTNESS%)" > NUL
+echo (1) Brightness level is set to %BRIGHTNESS%%%
+echo.
+
+
 :: SET VOLUME TO 50%
 powershell -command "Function Set-Speaker($Volume){$wshShell = new-object -com wscript.shell;1..50 | %% {$wshShell.SendKeys([char]174)};1..$Volume | %% {$wshShell.SendKeys([char]175)}}" ; Set-Speaker -Volume 25"
-echo (1) Volume level is set to 50%%
+echo (2) Volume is set to 50%%
 echo.
 
 
 :: SET TIME ZONE
 tzutil /s "Taipei Standard Time"
-echo (2) Time zone is set to UTC+8
+echo (3) Time zone is set to UTC+8
 echo.
 
 
 :: DOWNLOAD MS TEAMS (FOR WORK OR SCHOOL)
 if exist "%SYSTEMDRIVE%%HOMEPATH%\AppData\Local\Microsoft\Teams\current\Teams.exe" (
-    echo ^(3^) MS Teams is installed) & goto NEXT
+    echo ^(4^) MS Teams is installed) & goto NEXT
 if not exist "%SYSTEMDRIVE%%HOMEPATH%\Desktop\TeamsSetup_c_w_.exe" (
     powershell -command "Invoke-WebRequest https://tinyurl.com/nhcyn4ay" -OutFile "%SYSTEMDRIVE%%HOMEPATH%\Desktop\TeamsSetup_c_w_.exe" > NUL)
 if %errorlevel% neq 0 (echo Failed to download MS Teams!! Check the network connection) & goto REBOOT
-echo ^(3^) MS Teams is downloaded
+echo ^(4^) MS Teams is downloaded
 :NEXT
 echo.
 
@@ -27,9 +41,9 @@ echo.
 :: OUTPUT BITLOCKER RECOVERY KEY
 manage-bde -protectors -get C: > NUL
 if %errorlevel%==0 (
-    manage-bde -protectors -get C: > %~dp0\Bitlocker.txt & echo ^(4^) Bitlocker recovery key is saved
+    manage-bde -protectors -get C: > %~dp0\Bitlocker.txt & echo ^(5^) Bitlocker recovery key is saved
 ) else (
-    echo ^(4^) Bitlocker is not enabled on this system ^(skip output^))
+    echo ^(5^) Bitlocker is not enabled on this system - skip output)
 
 
 :: CHECK TEST SIGNING
@@ -50,7 +64,7 @@ if %SB_STATE% equ False (
     echo Secure boot is NOT disabled!! Enter BIOS to disable Secure boot first) & goto REBOOT
 :EOF
 echo.
-echo (5) Test signing is enabled
+echo (6) Test signing is enabled
 :REBOOT
 if exist BCD.txt del BCD.txt
 echo.
