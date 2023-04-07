@@ -1,8 +1,8 @@
 # LinuxHERO
 
-Version: 1.0
+Version: 1.1
 
-Build Date: 2023/04/06
+Build Date: 2023/04/07
 
 
 使用方法:

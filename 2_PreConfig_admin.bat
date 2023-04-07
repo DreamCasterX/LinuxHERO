@@ -23,6 +23,7 @@ echo.
 
 :: SET TIME ZONE
 tzutil /s "Taipei Standard Time"
+w32tm /resync > NUL
 echo (3) Time zone is set to UTC+8
 echo.
 
@@ -32,7 +33,7 @@ if exist "%SYSTEMDRIVE%%HOMEPATH%\AppData\Local\Microsoft\Teams\current\Teams.ex
     echo ^(4^) MS Teams is installed) & goto NEXT
 if not exist "%SYSTEMDRIVE%%HOMEPATH%\Desktop\TeamsSetup_c_w_.exe" (
     powershell -command "Invoke-WebRequest https://tinyurl.com/nhcyn4ay" -OutFile "%SYSTEMDRIVE%%HOMEPATH%\Desktop\TeamsSetup_c_w_.exe" > NUL)
-if %errorlevel% neq 0 (echo Failed to download MS Teams!! Check the network connection) & goto REBOOT
+if %errorlevel% neq 0 (echo Failed to download MS Teams!! Check your network connection) & goto STARTOVER
 echo ^(4^) MS Teams is downloaded
 :NEXT
 echo.
@@ -59,13 +60,13 @@ for /f %%i in ('powershell Confirm-SecureBootUEFI') do set SB_STATE=%%i
 if %SB_STATE% equ False (
     echo Enabing test signing now.... 
     bcdedit /set testsigning on > NUL
-    shutdown /r /t 5 & goto REBOOT
+    shutdown /r /t 5 & goto STARTOVER
 ) else (
-    echo Secure boot is NOT disabled!! Enter BIOS to disable Secure boot first) & goto REBOOT
+    echo Secure boot is NOT disabled!! Enter BIOS to disable Secure boot first) & goto STARTOVER
 :EOF
 echo.
 echo (6) Test signing is enabled
-:REBOOT
+:STARTOVER
 if exist BCD.txt del BCD.txt
 echo.
 echo.
