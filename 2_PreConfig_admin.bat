@@ -23,7 +23,7 @@ echo.
 
 :: SET TIME ZONE
 tzutil /s "Taipei Standard Time"
-w32tm /resync > NUL
+:: w32tm /resync > NUL
 echo (3) Time zone is set to UTC+8
 echo.
 
