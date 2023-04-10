@@ -36,7 +36,7 @@ Build Date: 2023/04/08
             
           跑完測試後執行, 自動存取所有log (包含截圖, 共五個檔案) 到 logs 資料夾
           
-    WhiteScreen.exe
+    WhiteSreen.exe
     
           取代小畫家方便量測亮度
 
