@@ -21,10 +21,12 @@ if exist sleepstudy-report.html move sleepstudy-report.html %~dp0\logs
 :: COPY PERFORMANCE LOG & CAPTURE SCREENSHOT OF XML FILE
 for /f %%i in ('dir /b /ad /od %PERF_LOG_PATH%') do set LATEST_FOLDER=%%i
 xcopy /E /Q /I %PERF_LOG_PATH%\%LATEST_FOLDER% %~dp0\logs\%LATEST_FOLDER%
-start /max %~dp0\data\wac.exe %~dp0\logs\%LATEST_FOLDER%\%LATEST_FOLDER%.xml
-start %~dp0\data\nircmd.exe cmdwait 10000 savescreenshot "%~dp0\logs\Results.png"
-timeout 12 > NUL
+xcopy /E /Q /I %~dp0\logs\%LATEST_FOLDER%\%LATEST_FOLDER%.xml  %temp% > NUL
+start "" "%~dp0\data\SendKeys.vbs"
+start %~dp0\data\nircmd.exe cmdwait 9000 savescreenshot "%~dp0\logs\Results.png"
+timeout 11 > NUL
 taskkill /f /im wac.exe > NUL
+if exist %temp%\*.xml del %temp%\*.xml
 
 
 :: ZIP PERFORMANCE LOG
