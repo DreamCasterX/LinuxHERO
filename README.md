@@ -32,11 +32,11 @@ Build Date: 2023/04/08
             
           f) Enable test signing
 
-      3_CopyLogs_admin.bat
+    3_CopyLogs_admin.bat
             
           跑完測試後執行, 自動存取所有log (包含截圖, 共五個檔案) 到 logs 資料夾
           
-   WhiteScreen.exe
+    WhiteScreen.exe
     
           取代小畫家方便量測亮度
 
