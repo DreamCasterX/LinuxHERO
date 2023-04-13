@@ -1,8 +1,8 @@
 # LinuxHERO
 
-Version: 1.2
+Version: 1.3
 
-Build Date: 2023/04/08
+Build Date: 2023/04/13
 
 
 使用方法:
@@ -36,8 +36,6 @@ Build Date: 2023/04/08
             
           跑完測試後執行, 自動存取所有log (包含截圖, 共五個檔案) 到 logs 資料夾
           
-    WhiteSreen.exe
-    
-          取代小畫家方便量測亮度
+
 
 

@@ -23,9 +23,17 @@ echo.
 
 :: SET TIME ZONE
 tzutil /s "Taipei Standard Time"
-:: w32tm /resync > NUL
+w32tm /resync > NUL
 echo (3) Time zone is set to UTC+8
 echo.
+
+
+:: STOP WINDOWS UPDATE
+:: net stop wuauserv > NUL
+:: net stop bits > NUL
+:: net stop dosvc > NUL
+:: echo (4) WU is stopped
+:: echo.
 
 
 :: DOWNLOAD MS TEAMS (FOR WORK OR SCHOOL)
