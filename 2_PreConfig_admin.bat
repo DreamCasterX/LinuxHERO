@@ -28,12 +28,14 @@ echo (3) Time zone is set to UTC+8
 echo.
 
 
+goto WU
 :: STOP WINDOWS UPDATE
-:: net stop wuauserv > NUL
-:: net stop bits > NUL
-:: net stop dosvc > NUL
-:: echo (4) WU is stopped
-:: echo.
+net stop wuauserv > NUL
+net stop bits > NUL
+net stop dosvc > NUL
+echo (4) WU is stopped
+echo.
+:WU
 
 
 :: DOWNLOAD MS TEAMS (FOR WORK OR SCHOOL)
@@ -45,6 +47,20 @@ if %errorlevel% neq 0 (echo Failed to download MS Teams!! Check your network con
 echo ^(4^) MS Teams is downloaded
 :NEXT
 echo.
+
+
+goto CHROME
+:: DOWNLOAD & INSTALL GOOGLE CHROME
+if exist "%SYSTEMDRIVE%\Program Files\Google\Chrome\Application\chrome.exe" (
+    echo ^(6^) Google Chrome is installed) & goto NEXT
+if not exist "%SYSTEMDRIVE%%HOMEPATH%\Desktop\ChromeSetup.exe" (
+    powershell -command "Invoke-WebRequest https://tinyurl.com/dbh42xwe" -OutFile "%SYSTEMDRIVE%%HOMEPATH%\Desktop\ChromeSetup.exe" > NUL) & ("%SYSTEMDRIVE%%HOMEPATH%\Desktop\ChromeSetup.exe")
+if %errorlevel% neq 0 (echo Failed to download Google Chrome!! Check your network connection) & goto STARTOVER
+echo ^(6^) Google Chrome is installed
+taskkill /f /im chrome.exe > NUL
+:NEXT
+echo.
+:CHROME
 
 
 :: OUTPUT BITLOCKER RECOVERY KEY

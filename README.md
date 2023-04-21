@@ -1,8 +1,8 @@
 # LinuxHERO
 
-Version: 1.3
+Version: 1.4
 
-Build Date: 2023/04/13
+Build Date: 2023/04/21
 
 
 使用方法:
@@ -26,15 +26,19 @@ Build Date: 2023/04/13
             
           c) 調整時區
             
-          d) 下載MS teams work/school 版本到桌面
+          d) 停止Windows Update (此功能預設Off)
             
-          e) 存取bitlocker key (建議在隨身碟執行)
+          e) 下載MS teams work/school 版本到桌面
             
-          f) Enable test signing
+          f) 下載並安裝Google Chrome (此功能預設Off)
+            
+          g) 存取bitlocker key  - 建議在隨身碟執行
+            
+          h) Enable test signing
 
     3_CopyLogs_admin.bat
             
-          跑完測試後執行, 自動存取所有log (包含截圖, 共五個檔案) 到 logs 資料夾
+          跑完測試後執行, 自動存取所有log (包含截圖, 共六個檔案) 到 logs 資料夾
           
 
 
